@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
 // Load routes
-const users = require("./routes/users");
+const users = require("./routes/api/users");
 
 // Init app
 const app = express();
@@ -19,6 +19,7 @@ mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB Connected..."))
   .catch(err => console.log(err));
+
 // Use routes
 app.use("/api/users", users);
 
