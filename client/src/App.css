@@ -2,6 +2,7 @@ body {
   margin-top: 20px;
 }
 
+/* NAVBAR */
 .navbar {
   opacity: 0.9;
   background: #fff;
@@ -15,4 +16,41 @@ body {
 
 .fa-utensils {
   color: #4b9aa3;
+}
+
+/* LANDING */
+#landing {
+  position: relative;
+  background: url("./img/welcome-plate.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 600px;
+}
+
+#landing .primary-overlay {
+  position: absolute;
+  background: rgba(30, 71, 75, 0.1);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#landing h1,
+#landing h3 {
+  text-shadow: 2px 4px 3px rgba(30, 71, 75, 0.72);
+}
+
+#landing p {
+  color: #153840;
+  font-size: 1.5rem;
+}
+
+#landing .btn-primary {
+  background-color: #4b9aa3;
+  border: none;
+}
+
+#landing .btn-primary:hover {
+  background-color: #358b94;
 }
