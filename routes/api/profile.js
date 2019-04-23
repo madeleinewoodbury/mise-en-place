@@ -34,4 +34,52 @@ router.get(
   }
 );
 
+// @route   POST api/profile
+// @desc    Create or edit user profile
+// @access  Private
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // Get and set profile fields
+    const profileFields = {};
+    profileFields.user = req.user.id;
+    if (req.body.handle) profileFields.handle = req.body.handle;
+    if (req.body.location) profileFields.location = req.body.location;
+    if (req.body.bio) profileFields.bio = req.body.bio;
+    // favorites = split csv into array
+    if (typeof req.body.favorites !== "undefined") {
+      profileFields.favorites = req.body.favorites.split(",");
+    }
+    // social
+    profileFields.social = {};
+    if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
+    if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
+    if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
+    if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile) {
+        // Update existing profile
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileFields },
+          { new: true }
+        ).then(profile => res.json(profile));
+      } else {
+        // Create new profile
+        // Check if handle already exists
+        Profile.findOne({ handle: profileFields.handle }).then(profile => {
+          if (profile) {
+            res.status(400).json({ profile: "That handle already exists" });
+          }
+
+          // Save profile
+          new Profile(profileFields).save().then(profile => res.json(profile));
+        });
+      }
+    });
+  }
+);
+
 module.exports = router;
