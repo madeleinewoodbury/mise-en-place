@@ -46,11 +46,15 @@ body {
   font-size: 1.5rem;
 }
 
-#landing .btn-primary {
+#landing .btn-primary,
+#login .btn-primary,
+#register .btn-primary {
   background-color: #4b9aa3;
   border: none;
 }
 
-#landing .btn-primary:hover {
+#landing .btn-primary:hover,
+#login .btn-primary:hover,
+#register .btn-primary:hover {
   background-color: #358b94;
 }
