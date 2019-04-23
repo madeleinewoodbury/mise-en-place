@@ -5,6 +5,7 @@ const passport = require("passport");
 
 // Load routes
 const users = require("./routes/api/users");
+const profile = require("./routes/api/profile");
 
 // Init app
 const app = express();
@@ -29,6 +30,7 @@ require("./config/passport")(passport);
 
 // Use routes
 app.use("/api/users", users);
+app.use("/api/profile", profile);
 
 const port = process.env.PORT || 5500;
 app.listen(port, () => console.log(`Server running on port ${port}`));
